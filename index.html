@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Msoro — Fun Village Facts</title>
+	<style>
+		:root{--green:#2e8b57;--card:#ffffffcc}
+		html,body{height:100%;margin:0}
+		body{display:flex;align-items:center;justify-content:center;background:var(--green);font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#013220}
+		.card{background:var(--card);padding:2rem 1.5rem;border-radius:12px;max-width:720px;box-shadow:0 8px 30px rgba(0,0,0,.2);text-align:center}
+		h1{margin:0 0 0.5rem;font-size:1.35rem}
+		p.fact{font-size:1.125rem;margin:1rem 0;min-height:3.5rem;display:flex;align-items:center;justify-content:center}
+		button{background:#006400;color:#fff;border:none;padding:.6rem 1rem;border-radius:8px;font-size:1rem;cursor:pointer}
+		button:active{transform:translateY(1px)}
+		.credit{margin-top:.75rem;font-size:.85rem;color:#064a36}
+	</style>
+</head>
+<body>
+	<main class="card" role="main">
+		<h1>Fun Facts about Msoro</h1>
+		<p class="fact" id="fact" aria-live="polite">Welcome — click the button to see a fun fact about your village.</p>
+		<button id="newFact">Show new fact</button>
+		<div class="credit">Made for Msoro, Zambia</div>
+	</main>
+
+	<script>
+		const facts = [
+			"Msoro has a close-knit community where neighbours often help each other.",
+			"Nshima (a thick maize porridge) is a common and beloved staple food in the area.",
+			"Traditional music and dance are important parts of celebrations and ceremonies.",
+			"Local markets are lively places to find fresh produce and handmade goods.",
+			"Many families practice small-scale farming, growing maize, beans, and vegetables.",
+			"Children often learn local stories and songs passed down through generations.",
+			"Clear night skies in rural areas make stargazing a peaceful evening activity.",
+			"Community events and gatherings help keep cultural traditions alive.",
+			"Visitors are usually welcomed warmly by residents in village communities.",
+			"Oral storytelling is a fun way people in the village share history and lessons."
+		];
+
+		const factEl = document.getElementById('fact');
+		const btn = document.getElementById('newFact');
+		let lastIndex = -1;
+
+		function showFact(index){
+			if (typeof index !== 'number'){
+				// choose a new random index different from lastIndex
+				let i;
+				do { i = Math.floor(Math.random()*facts.length); } while(facts.length>1 && i===lastIndex);
+				index = i;
+			}
+			lastIndex = index;
+			factEl.textContent = facts[index];
+		}
+
+		btn.addEventListener('click', ()=> showFact());
+
+		// show an initial random fact
+		showFact();
+	</script>
+</body>
+</html>
